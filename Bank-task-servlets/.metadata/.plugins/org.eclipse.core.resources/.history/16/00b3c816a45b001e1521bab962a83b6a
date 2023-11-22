@@ -1,0 +1,21 @@
+package com.java.ex;
+
+
+interface Int1 {
+     int a = 10;
+    void display();
+}
+ 
+class TestClass implements Int1 {
+   
+    public void display(){
+      System.out.println("Ananya");
+    }
+ 
+    public static void main(String[] args)
+    {
+        TestClass t = new TestClass();
+        t.display();
+        System.out.println(a);
+    }
+}

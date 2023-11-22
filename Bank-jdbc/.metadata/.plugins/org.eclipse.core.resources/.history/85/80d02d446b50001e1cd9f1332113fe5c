@@ -1,0 +1,9 @@
+package com.java.lms;
+
+import java.util.List;
+
+public interface EmployeeDAO {
+	List<Employee> showEmployeeDao();
+	Employee searchEmployeeDao(int empId);
+
+}

@@ -1,0 +1,26 @@
+package com.java.ejb;
+
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class InsurancePlanDAOImpl implements InsurancePlanDAO {
+	
+	SessionFactory sf;
+	Session session;
+
+	
+	@Override
+	public List<InsurancePlan> showInsurancePlan() {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Criteria cr =session.createCriteria(InsurancePlan.class);
+		return cr.list();
+		
+	}
+
+	
+
+}

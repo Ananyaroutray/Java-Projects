@@ -1,0 +1,17 @@
+127.0.0.1 - - [27/Sep/2023:16:44:03 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:44:04 +0530] "GET /BankServlet/CreateAc.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:44:04 +0530] "GET /favicon.ico HTTP/1.1" 404 1085
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:44:16 +0530] "POST /BankServlet/BankCreateAcServlet HTTP/1.1" 404 1109
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:45:07 +0530] "GET /BankServlet/SearchAccount.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:45:12 +0530] "POST /BankServlet/BankSearchServlet HTTP/1.1" 500 2258
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:46:10 +0530] "POST /BankServlet/BankSearchServlet HTTP/1.1" 500 2258
+127.0.0.1 - - [27/Sep/2023:16:48:35 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:48:46 +0530] "POST /BankServlet/BankCreateAcServlet HTTP/1.1" 404 1109
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:49:17 +0530] "POST /BankServlet/BankSearchServlet HTTP/1.1" 500 2258
+127.0.0.1 - - [27/Sep/2023:16:52:34 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:16:52:46 +0530] "POST /BankServlet/BankCreateAcServlet HTTP/1.1" 404 1109
+127.0.0.1 - - [27/Sep/2023:17:09:02 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:17:09:12 +0530] "POST /BankServlet/BankCreateAcServlet HTTP/1.1" 500 2341
+127.0.0.1 - - [27/Sep/2023:17:12:08 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:17:12:18 +0530] "POST /BankServlet/BankCreateAcServlet HTTP/1.1" 200 38
+0:0:0:0:0:0:0:1 - - [27/Sep/2023:17:13:26 +0530] "POST /BankServlet/BankSearchServlet HTTP/1.1" 200 102

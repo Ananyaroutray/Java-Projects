@@ -1,0 +1,14 @@
+package com.java.Ctask;
+
+import java.sql.SQLException;
+
+
+
+public interface CustmoerDAO {
+
+	String addCustomer(Custmoer customer) throws ClassNotFoundException, SQLException;
+
+	
+
+	
+}

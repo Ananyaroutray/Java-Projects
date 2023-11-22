@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+</head>
+<body>
+    <form action="PasswordResetServlet" method="post">
+        <center>
+            <h1>Reset Password</h1>
+            <table border="3px">
+                <tr>
+                    <th>Reset Code:</th>
+                    <td>
+                        <input type="text" name="resetCode">
+                    </td>
+                </tr>
+                <tr>
+                    <th>New Password:</th>
+                    <td>
+                        <input type="password" name="newPassword">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Confirm New Password:</th>
+                    <td>
+                        <input type="password" name="confirmNewPassword">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="submit" value="Reset Password">
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </form>
+</body>
+</html>

@@ -1,0 +1,12 @@
+package com.java.ejb;
+
+import java.util.List;
+
+public class DoctorImpl {
+	
+	public List<Doctor> showDoctorEjb() throws NamingException{
+		HmsBeanRemote remote = RemoteHelper.lookupRemoteStatelessHms();
+		return remote.showDoctor();
+	}
+
+}

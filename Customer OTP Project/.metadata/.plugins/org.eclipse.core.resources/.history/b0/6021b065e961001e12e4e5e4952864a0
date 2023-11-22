@@ -1,0 +1,53 @@
+package infinite.OtpApp;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class SendResetCodeServlet
+ */
+public class SendResetCodeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SendResetCodeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username = request.getParameter("uname");
+	    String newPassword = request.getParameter("newPassword");
+	    String confirmPassword = request.getParameter("confirmPassword");
+	    String otp = request.getParameter("otp");
+
+	    if (newPassword != null && newPassword.equals(confirmPassword)) {
+	        // Perform the password reset logic here, e.g., connecting to the database, updating the password, etc.
+	        // You can use a DAO class (like OtpAppDaoImpl) for this purpose.
+
+	        // Redirect to the "Password Reset Success" page upon successful reset.
+	        response.sendRedirect("password_reset_success.html");
+	    } else {
+	        response.getWriter().write("Passwords do not match.");
+	    }
+	}
+
+	}

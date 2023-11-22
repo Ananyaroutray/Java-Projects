@@ -1,0 +1,54 @@
+package infinite.OtpApp;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class SendResetCodeServlet
+ */
+public class SendResetCodeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SendResetCodeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String otp = request.getParameter("otp");
+	    String newPassword = request.getParameter("newPassword");
+	    String confirmPassword = request.getParameter("confirmPassword");
+	    String username = ""; // Retrieve the username from the session or request, wherever it was stored
+
+	    if (newPassword != null && newPassword.equals(confirmPassword)) {
+	        OtpAppDaoImpl dao = new OtpAppDaoImpl();
+	        try {
+	            String result = dao.resetPassword(username, Integer.parseInt(otp), newPassword);
+	        } catch (NumberFormatException | ClassNotFoundException | SQLException e) {
+	            e.printStackTrace();
+	            response.getWriter().write("Error: " + e.getMessage());
+	        }
+	    } else {
+	        response.getWriter().write("Passwords do not match.");
+	    }
+	}
+}

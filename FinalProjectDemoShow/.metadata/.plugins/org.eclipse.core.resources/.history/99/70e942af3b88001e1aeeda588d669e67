@@ -1,0 +1,63 @@
+<%@page contentType="text/html"%>
+<!--  This directive sets the content type of the response to "text/html."
+It informs the web container that the content being sent back to the client browser is HTML. -->
+                                   
+<%@page pageEncoding="UTF-8"%>
+<!--This directive sets the character encoding for the page to UTF-8.
+It specifies how characters are encoded in the response, ensuring proper handling of international characters.  -->
+
+<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
+<!--This declaration introduces the JavaServer Faces (JSF) Core tag library with the prefix "f."
+The core library provides essential functionality for JSF applications.  -->
+
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<!-- This declaration introduces the JSF HTML tag library with the prefix "h." 
+The html library contains tags for rendering HTML components in JSF pages. -->
+<f:view>
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <title>JSP Page</title>
+            <style>
+            	body {
+            	    background-image: url("image.png");
+                    background-size: cover;
+					height: 600px;
+					}
+            
+                .button-link {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                }
+                .button-link:hover {
+                    background-color: blue; 
+                    color: white;
+                }
+            </style>
+        </head>
+        <body>
+            <h:form>
+                <center>
+                   <h3> Welcome to our site </h3> <b style="font-size: 24px; font-weight: bold;"><h:outputText value="#{loggedCustomer}" /></b>
+                    <br/><br/>
+                    
+                    <h:commandLink styleClass="button-link" action="#{loginImpl.showAppointmentConfirmed()}">
+                        <h:outputLabel value="Your upcoming Appointment" />
+                    </h:commandLink>
+
+                    <br/><br/>
+
+                    <h:commandLink styleClass="button-link" action="#{loginImpl.showAppointmentVisited()}">
+                        <h:outputLabel value="Your previous Appointments" />
+                    </h:commandLink>
+                </center>
+            </h:form>
+        </body>
+    </html>
+</f:view>

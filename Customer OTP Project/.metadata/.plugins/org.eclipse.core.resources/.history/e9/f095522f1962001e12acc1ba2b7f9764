@@ -1,0 +1,91 @@
+import java.io.IOException;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/ForgotPasswordServlet")
+public class ForgotPasswordServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Retrieve user's email or username from the form
+        String username = request.getParameter("uname");
+
+        // TODO: Generate a reset code and send it to the user's email.
+        String resetCode = generateResetCode(); // Implement your code to generate the reset code.
+        String userEmail = getUserEmail(username); // Implement your code to retrieve the user's email.
+
+        // Send the reset code to the user's email
+        sendResetCodeEmail(userEmail, resetCode);
+
+        // Redirect to a page to enter the reset code (e.g., "ResetPassword.html")
+        response.sendRedirect("ResetPassword.html");
+    }
+
+    private String generateResetCode() {
+        // Implement your code to generate a random reset code.
+        // For simplicity, you can use a random number or alphanumeric code generation logic.
+        // Return the generated code as a string.
+        return "123456"; // Replace with your actual code generation logic.
+    }
+
+    private String getUserEmail(String username) {
+        // Implement your code to retrieve the user's email based on the username.
+        // Return the user's email as a string.
+        // You should query your database or data source for this information.
+        // Example:
+        // return userDao.getUserEmailByUsername(username);
+        return "user@example.com"; // Replace with your actual data retrieval logic.
+    }
+
+    private void sendResetCodeEmail(String userEmail, String resetCode) {
+        // SMTP server configuration
+        String host = "smtp.example.com"; // Replace with your SMTP server host
+        String port = "587"; // Replace with your SMTP server port
+        String username = "your_username"; // Replace with your SMTP username
+        String password = "your_password"; // Replace with your SMTP password
+
+        // Email properties
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", port);
+
+        // Create a session with the SMTP server
+        Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Create a message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(userEmail));
+            message.setSubject("Password Reset Code");
+            message.setText("Your password reset code is: " + resetCode);
+
+            // Send the message
+            Transport.send(message);
+
+            // Print a message for demonstration purposes (replace with actual logging)
+            System.out.println("Reset code sent to: " + userEmail);
+        } catch (MessagingException e) {
+            e.printStackTrace(); // Handle exceptions appropriately in your application
+        }
+    }
+}

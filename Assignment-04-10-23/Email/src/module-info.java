@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author ananyar
+ *
+ */
+module Email {
+}

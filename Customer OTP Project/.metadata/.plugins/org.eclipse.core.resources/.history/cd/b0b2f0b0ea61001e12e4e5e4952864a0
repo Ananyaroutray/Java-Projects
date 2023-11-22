@@ -1,0 +1,15 @@
+html
+Copy code
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Password Reset Success</title>
+</head>
+<body>
+    <center>
+        <h1>Password Reset Successful</h1>
+        <p>Your password has been successfully reset.</p>
+    </center>
+</body>
+</html>

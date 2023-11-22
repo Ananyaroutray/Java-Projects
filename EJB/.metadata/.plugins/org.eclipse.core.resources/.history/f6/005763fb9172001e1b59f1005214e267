@@ -1,0 +1,111 @@
+package com.java.ejb;
+
+//import java.sql.SQLException;
+import java.util.List;
+import java.util.Random;
+//import java.util.UUID;
+
+import javax.naming.NamingException;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+//import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+//import org.hibernate.criterion.Restrictions;
+
+
+public class InsuranceImpl {
+	public List<Insurance> showInsuranceEjb() throws NamingException {
+		InsuranceRemote remote = RemoteHelper.lookupRemoteStatelessInsurance();
+		return remote.showInsurance();
+	}
+	SessionFactory sf;
+	Session session;
+	
+	/*
+	 * private String enteredOtp;
+	 * 
+	 * public String getEnteredOtp() { return enteredOtp; } public void
+	 * setEnteredOtp(String enteredOtp) { this.enteredOtp = enteredOtp; }
+	 */
+	public String Authincrement() {
+	    sf = SessionHelper.getConnection();
+	    session = sf.openSession();
+	    Criteria criteria = session.createCriteria(Customer_Authorization.class)
+	        .setProjection(Projections.max("auth_ID"));
+	    String maxAuthID = (String) criteria.uniqueResult();
+	    if (maxAuthID == null) {
+	        return "A001";
+	    } else {
+	        int comp = Integer.parseInt(maxAuthID.substring(1, 4));
+	        return String.valueOf(maxAuthID.charAt(0) + "00" + (++comp));
+	    }
+	}
+
+	public static int generateOtp() {
+		Random r = new Random( System.currentTimeMillis() );
+	    return ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
+	}
+	
+//	public String createCustomerDao(Customer_Details customer) {
+	//	sf=SessionHelper.getConnection();
+	//	session=sf.openSession();
+	//	Transaction tran=session.beginTransaction();
+		
+	//	int otp=generateOtp();
+	//	session.save(customer);
+		
+	//	String body = "Welcome to Mr/Miss  " +customer.getFirstName() + "\r\n" + "Your OTP Generated Successfully..." +
+		//		  "\r\n" + "OTP is " + otp;
+			//	  MailSend.mailSend(customer.getEmail(),"Otp Send Successfully...", body);
+			//	  tran.commit();  
+	//	Customer_Authorization authorization = new Customer_Authorization();
+		//		  authorization.setCust_ID(customer.getCust_ID());
+			//	  authorization.setOtp(Integer.toString(otp));
+			//	  authorization.setStatus("DeActive"); 
+			//	  Transaction transaction1 = session.beginTransaction();
+			//	  session.save(authorization);
+			//	  transaction1.commit();
+			//	  return "hello.jsp?faces-redirect=true"; 
+//	}
+	
+
+
+	public String createCustomerDao(Customer customer) {
+	    sf = SessionHelper.getConnection();
+	    session = sf.openSession();
+	    Transaction tran = session.beginTransaction();
+
+	    int otp = generateOtp();
+	    //customer.setOtp(Integer.toString(otp)); // Set the OTP in the customer object
+	    session.save(customer);
+
+	    String body = "Welcome to Mr/Miss " + customer.getFirstName() + "\r\n" + "Your OTP Generated Successfully..." +
+	            "\r\n" + "OTP is " + otp;
+	    
+	    // Send the email here, assuming the MailSend method works correctly
+	    try {
+	        MailSend.mailSend(customer.getEmail(), "Otp Send Successfully...", body);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // Handle the email sending error (e.g., log or return an error message)
+	        return "error.jsp?faces-redirect=true";
+	    }
+	    
+	    tran.commit();
+
+	    // Customer_Authorization entry
+	    Customer_Authorization authorization = new Customer_Authorization();
+	    authorization.setCust_ID(customer.getCust_ID());
+	    authorization.setOtp(Integer.toString(otp));
+	    authorization.setStatus("DeActive");
+	    Transaction transaction1 = session.beginTransaction();
+	    session.save(authorization);
+	    transaction1.commit();
+
+	    return "hello.jsp?faces-redirect=true";
+	}
+
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This web.xml file is not required when using Servlet 3.0 container,
+     see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <servlet>
+    <servlet-name>Jersey Web Application</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>com.java.bankservlets</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey Web Application</servlet-name>
+    <url-pattern>/webapi/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Bank</display-name>
+    <servlet-name>Bank</servlet-name>
+    <servlet-class>com.java.bankservlets.Bank</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Bank</servlet-name>
+    <url-pattern>/Bank</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BankSearchServlet</display-name>
+    <servlet-name>BankSearchServlet</servlet-name>
+    <servlet-class>com.java.bankservlets.BankSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BankSearchServlet</servlet-name>
+    <url-pattern>/BankSearchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BankCloseManagerServlet</display-name>
+    <servlet-name>BankCloseManagerServlet</servlet-name>
+    <servlet-class>com.java.bankservlets.BankCloseManagerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BankCloseManagerServlet</servlet-name>
+    <url-pattern>/BankCloseManagerServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

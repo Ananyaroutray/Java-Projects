@@ -1,0 +1,14 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class CustmoerDAOImpl implements CustmoerDAO {
+	
+	PreparedStatement pst;
+	Connection connection;
+	@Override
+	public String addCustomer(Custmoer customer) throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	}

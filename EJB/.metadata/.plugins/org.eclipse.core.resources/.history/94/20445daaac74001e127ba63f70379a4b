@@ -1,0 +1,16 @@
+package com.java.ejb;
+
+import java.util.List;
+
+public class InsurancePlanDAOImpl implements InsurancePlanDAO {
+
+	
+	@Override
+	public List<InsurancePlan> showInsurancePlan() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+}

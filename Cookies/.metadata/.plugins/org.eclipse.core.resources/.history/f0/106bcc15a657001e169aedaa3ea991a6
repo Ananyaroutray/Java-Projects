@@ -1,0 +1,10 @@
+package com.java.Ctask;
+
+import java.sql.SQLException;
+
+import com.java.infinite.Login;
+
+public interface CustmoerDAO {
+	String addCustmoer(Custmoer custmoer) throws ClassNotFoundException, SQLException; 
+
+}

@@ -1,0 +1,61 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+
+<%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%> 
+<%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%> 
+
+<f:view>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h:form>
+            <center>
+                <h2><h:outputText value="Add Patient"/></h2>
+            
+            	Patient Id:
+            	 <h:inputText id="pid" value="#{patient.pid}" /><br><br>
+            	 
+                Name: 
+                <h:inputText id="name" value="#{patient.name}" /><br><br>
+            
+                Age: 
+                <h:inputText id="age" value="#{patient.age}" /><br><br>
+            
+                Weight: 
+                <h:inputText id="dept" value="#{patient.weight}" /><br><br>
+                
+ 
+				<h:selectOneRadio id="basic" value="#{patient.gender}">
+    			<f:selectItem itemValue="m" itemLabel="Male" />
+    			<f:selectItem itemValue="f" itemLabel="Female" />
+				</h:selectOneRadio><br>
+               
+            
+                Address : 
+                <h:inputText id="address" value="#{patient.address}" /><br><br>
+                
+                Phone No : 
+                <h:inputText id="phoneno" value="#{patient.phoneno}" /><br><br>
+            
+            	Disease :
+            	<h:inputText id="disease" value="#{patient.disease}" /><br><br>
+            	
+            	Doctor Id :
+            	<h:inputText id="doctorid" value="#{patient.doctorid}" /><br><br>
+            	
+            	Email :
+            	<h:inputText id="email" value="#{patient.email}" /><br><br>
+            	
+            	
+                   <h:commandButton action="#{pImpl.addPatient(patient)}" value="Add" />
+                   <br><br>
+                   <h:commandButton action="ShowPatient" value="Back" />
+               
+            </center>
+        </h:form>
+    </body>
+</html>
+</f:view>

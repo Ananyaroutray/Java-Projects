@@ -1,0 +1,5 @@
+ackage com.java.ejb;
+
+public @interface Stateful {
+
+}

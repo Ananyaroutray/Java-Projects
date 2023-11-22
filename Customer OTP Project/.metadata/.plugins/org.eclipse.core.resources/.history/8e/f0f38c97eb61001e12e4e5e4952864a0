@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>Password Reset Confirmation</h2>
+    <p>A password reset code has been sent to your email.</p>
+    <form action="ResetPasswordServlet" method="post">
+        <input type="hidden" name="userId" value="<%= request.getAttribute("resetCode")>
+        <label for="newPassword">New Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required><br><br>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+        <input type="submit" value="Reset Password">
+    </form>
+</body>
+</html>

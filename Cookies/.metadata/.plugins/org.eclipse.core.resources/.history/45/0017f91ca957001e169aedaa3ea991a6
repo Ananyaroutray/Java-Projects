@@ -1,0 +1,28 @@
+package com.java.Ctask;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.java.infinite.ConnectionHelper;
+
+public class CustmoerDAOImpl implements CustmoerDAO{
+	PreparedStatement pst;
+	Connection connection;
+	@Override
+	public String addCustomer(Custmoer customer) throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String cmd = "Insert into Custmoer(FirstName,LastName,UserName,PassCode,Email,PhoneNo)values(?,?,?,?,?,?)";
+		 pst = connection.prepareStatement(cmd);
+		 pst.setString(1, customer.getFirstName());
+         pst.setString(2, customer.getLastName());
+         pst.setString(3, customer.getUserName());
+         pst.setString(4, customer.getPassCode());
+         pst.setString(5, customer.getEmail());
+         pst.setString(6, customer.getPhoneNo());
+		return "Custmoer Account Added...";
+	}
+	
+	
+
+}

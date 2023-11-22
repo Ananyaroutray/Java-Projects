@@ -1,0 +1,46 @@
+package com.java.ejb;
+
+public class Customer_Authorization {
+	
+	private String auth_ID;
+	private String cust_ID;
+	private String otp;
+	private String status;
+	public Customer_Authorization(String auth_ID, String cust_ID, String otp, String status) {
+		super();
+		this.auth_ID = auth_ID;
+		this.cust_ID = cust_ID;
+		this.otp = otp;
+		this.status = status;
+	}
+	public Customer_Authorization() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public String getAuth_ID() {
+		return auth_ID;
+	}
+	public void setAuth_ID(String auth_ID) {
+		this.auth_ID = auth_ID;
+	}
+	public String getCust_ID() {
+		return cust_ID;
+	}
+	public void setCust_ID(String cust_ID) {
+		this.cust_ID = cust_ID;
+	}
+	public String getOtp() {
+		return otp;
+	}
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
+}

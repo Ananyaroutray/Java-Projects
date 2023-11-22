@@ -1,0 +1,11 @@
+package com.java.ejb;
+
+public class CustomerDAOImpl implements CustomerDAO {
+
+	@Override
+	public String addCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

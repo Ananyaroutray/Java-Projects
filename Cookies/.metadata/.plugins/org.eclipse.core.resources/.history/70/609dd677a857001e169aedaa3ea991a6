@@ -1,0 +1,20 @@
+package com.java.Ctask;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.java.infinite.ConnectionHelper;
+
+public class CustmoerDAOImpl implements CustmoerDAO{
+	PreparedStatement pst;
+	Connection connection;
+	@Override
+	public String addCustomer(Custmoer customer) throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		return null;
+	}
+	
+	
+
+}

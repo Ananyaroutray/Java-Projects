@@ -1,0 +1,36 @@
+package com.java.ejb;
+
+
+
+public class Controller {
+	
+	
+	private PatientReport patientreport;
+    private EjbImpl daoImpl;
+    
+ 
+    // Getters and setters...
+ 
+    public PatientReport getPatientreport() {
+		return patientreport;
+	}
+ 
+	public void setPatientreport(PatientReport patientreport) {
+		this.patientreport = patientreport;
+	}
+ 
+	public EjbImpl getDaoImpl() {
+		return daoImpl;
+	}
+ 
+	public void setDaoImpl(EjbImpl daoImpl) {
+		this.daoImpl = daoImpl;
+	}
+ 
+	
+ 
+	
+ 
+}
+
+

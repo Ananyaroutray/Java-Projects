@@ -1,0 +1,80 @@
+package com.java.agent;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AgentDaoImpl implements AgentDAO{
+	 Connection connection;
+	 PreparedStatement pst;
+		@Override
+		public List<Agent> showAgentDao() throws ClassNotFoundException, SQLException{
+			connection = AgentConnectionHelper.getConnection();
+			String cmd ="select * from Agent";
+			pst = connection.prepareStatement(cmd);
+			ResultSet rs = pst.executeQuery();
+			List<Agent> agentList = new ArrayList<Agent>();
+			Agent agent = null;
+			while(rs.next()) {
+				agent = new Agent();
+				agent.setAgentid(rs.getInt("agentid"));
+				agent.setName(rs.getString("name"));
+				agent.setGender(Gender.valueOf(rs.getString("gender")));
+				agent.setCity(rs.getString("city"));
+	            agent.setMarritalstatus(rs.getString("marritalstatus"));
+				agent.setPremium(rs.getInt("premium"));
+			}
+			return agentList;
+				
+			
+		}
+		@Override
+		public Agent searchAgentDao(int agentid) throws ClassNotFoundException, SQLException {
+				connection = AgentConnectionHelper.getConnection();
+				String cmd ="select * from Agent where agentid=?";
+				pst = connection.prepareStatement(cmd);
+				pst.setInt(1, agentid);
+				ResultSet rs = pst.executeQuery();
+				Agent agent = new Agent();
+				if(rs.next()) {
+					agent = new Agent();
+					agent.setName(rs.getString("name"));
+					agent.setGender(Gender.valueOf(rs.getString("gender")));
+					agent.setCity(rs.getString("city"));
+		            agent.setMarritalstatus(rs.getString("marritalstatus"));
+					agent.setPremium(rs.getInt("premium"));
+				}
+				return agent;
+			
+		}
+		@Override
+		public String addAgentDao(Agent agent) throws ClassNotFoundException, SQLException {
+			connection = AgentConnectionHelper.getConnection();
+			String cmd ="Insert into Agent(Agentid,name,gender,city,marritalstatus,premium)"+"values(?,?,?,?,?,?)";
+			pst = connection.prepareStatement(cmd);
+			PreparedStatement pst = connection.prepareStatement(cmd);
+			pst.setInt(1, agent.getAgentid());
+	        pst.setString(2, agent.getName());
+	        pst.setString(3, agent.getGender().toString());
+	        pst.setString(4, agent.getCity());
+	        pst.setString(5, agent.getMarritalstatus());
+	        pst.setInt(6, agent.getPremium());
+	        pst.executeUpdate();
+	        return"Agent record inserted...";
+		}
+		@Override
+		public String deleteAgentDao(int agentid) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public String updateAgent(Agent agentNew) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+}

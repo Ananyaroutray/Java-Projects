@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 03-Nov-2023, 12:59:55 pm by Hibernate Tools 3.6.2.Final -->
+<hibernate-mapping>
+
+	<class name="com.java.hib.PatientAppointment"
+		table="Patient_Appointment">
+
+		<id name="uhId" type="java.lang.String">
+
+			<column name="UHID" />
+			<generator class="assigned" />
+		</id>
+
+
+
+
+		<property name="appointmentId" type="java.lang.String">
+			<column name="APPOINTMENTID" />
+		</property>
+
+		<property name="providerid" type="java.lang.String">
+			<column name="PROVIDERID" />
+		</property>
+
+		<property name="department" type="java.lang.String">
+			<column name="DEPARTMENT" />
+		</property>
+
+		<property name="firstName" type="java.lang.String">
+			<column name="FIRSTNAME" />
+		</property>
+
+		<property name="lastName" type="java.lang.String">
+			<column name="LASTNAME" />
+		</property>
+
+		<property name="appointmentDate" type="java.util.Date">
+			<column name="APPOINTMENTDATE" />
+		</property>
+
+		<property name="appointmentTime" type="java.lang.String">
+			<column name="APPOINTMENTTIME" />
+		</property>
+
+		<property name="reason" type="java.lang.String">
+			<column name="REASON" />
+		</property>
+
+		<property name="status" type="java.lang.String">
+			<column name="STATUS" />
+		</property>
+
+
+	</class>
+
+</hibernate-mapping>

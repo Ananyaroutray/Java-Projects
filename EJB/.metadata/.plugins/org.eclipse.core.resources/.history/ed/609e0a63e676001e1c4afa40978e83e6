@@ -1,0 +1,41 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.naming.NamingException;
+
+import jakarta.validation.constraints.Pattern;
+
+public class Controller {
+	private PatientReport patientreport;
+    private EjbImpl daoImpl;
+    
+ 
+    // Getters and setters...
+ 
+    public PatientReport getPatientreport() {
+		return patientreport;
+	}
+ 
+	public void setPatientreport(PatientReport patientreport) {
+		this.patientreport = patientreport;
+	}
+ 
+	public EjbImpl getDaoImpl() {
+		return daoImpl;
+	}
+ 
+	public void setDaoImpl(EjbImpl daoImpl) {
+		this.daoImpl = daoImpl;
+	}
+ 
+	
+ 
+	
+ 
+}
+
+

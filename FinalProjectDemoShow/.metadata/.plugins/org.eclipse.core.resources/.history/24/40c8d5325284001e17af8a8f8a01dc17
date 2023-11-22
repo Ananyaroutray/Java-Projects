@@ -1,0 +1,230 @@
+package com.java.hib;
+
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.faces.context.FacesContext;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+public class LoginDAOImpl implements LoginDAO {
+	
+	SessionFactory sf ;
+	Session session;
+
+	Timestamp databaseDate = getDatabaseDate(); 
+    Date currentDate = new Date();
+    Timestamp currentTimestamp = new Timestamp(currentDate.getTime());
+
+
+	@Override
+	public String loginDao(Login login) {
+		 Map<String, Object> sessionMap =
+					FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		String encPass = EncryptPassword.getCode(login.getPassword());
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Criteria cr = session.createCriteria(Login.class);
+		cr.add(Restrictions.eqOrIsNull("userName", login.getUserName()));
+		cr.add(Restrictions.eqOrIsNull("password", encPass.trim()));
+		cr.setProjection(Projections.rowCount());
+		long count = (long)cr.uniqueResult();
+		session.close();
+		sf.close();
+
+		if(count==1) {
+			sessionMap.put("loggedCustomer",  login.getUserName());
+//			sessionMap.put("uhid", login.getUhId());
+			
+			System.out.println(sessionMap.put("uhid", login.getUhId()));
+			sf = SessionHelper.getConnection();
+			session = sf.openSession();
+			cr = session.createCriteria(Login.class);
+			cr.add(Restrictions.eqOrIsNull("userName", login.getUserName()));
+			Login customerFound = (Login) cr.uniqueResult();
+			sessionMap.put("customerFound", customerFound);
+			sessionMap.put("uhid", customerFound.getUhId());
+			System.out.println("Sessionfactory");
+			System.out.println(sessionMap.put("uhid", customerFound.getUhId()));
+			return "DashBoard.jsp?faces-redirect=true";
+		}else {
+			sessionMap.put("errorMessage", "Invalid Credentials....");
+			return "DashBoard.jsp?faces-redirect=true";
+		}
+	}
+	
+	
+	private Timestamp getDatabaseDate() {
+		return new Timestamp(System.currentTimeMillis() - (24 * 60 * 60 * 1000)); 
+	}
+
+
+	@Override
+	public List<Login> showLogin() {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Criteria cr = session.createCriteria(Login.class);
+		return cr.list();
+	}
+
+	@Override
+	public String addMember(Login login) {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Transaction trans = session.beginTransaction();
+		session.save(login);
+		trans.commit();
+		return "PatientAppointment.xhtml?faces-redirect=true";
+	}
+
+	@Override
+	public List<PatientAppointment> searchMember(String status) {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Map<String,Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		 String uhId = (String) sessionMap.get("loggedCustomerId");
+		 System.out.println("UhId :"+uhId);
+
+		 
+		        Criteria cr = session.createCriteria(PatientAppointment.class);
+		        cr.add(Restrictions.eq("uhId", uhId));
+		        cr.add(Restrictions.eq("status", "CONFIRMED"));
+		        List<PatientAppointment> paList = cr.list();
+		        System.out.println(paList);
+		        return paList;
+		    }
+		    
+			
+				
+
+	@Override
+	public List<PatientAppointment> searchMemberVisited(String status) {
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		Map<String,Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		 String uhId = (String) sessionMap.get("loggedCustomerId");
+		 System.out.println("UhId :"+uhId);
+		
+			 System.out.println("inside if block");
+		        Criteria cr = session.createCriteria(PatientAppointment.class);
+		        cr.add(Restrictions.eq("uhId", uhId));
+		        cr.add(Restrictions.eq("status", "VISITED"));
+		        List<PatientAppointment> paList = cr.list();
+		        System.out.println(paList);
+		        return paList;
+		    
+		
+	}
+	
+	public String searchCustomerDetailsDao() {
+		Map<String, Object> sessionMap =
+						FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		 String customerLoggined = (String)sessionMap.get("loggedCustomer");
+			sf = SessionHelper.getConnection();
+			session = sf.openSession();
+			Criteria criteria = session.createCriteria(PatientAppointment.class);
+			
+			criteria.add(Restrictions.eq("uhId", customerLoggined));
+			PatientAppointment customerData = (PatientAppointment) criteria.uniqueResult();
+		//	sessionMap.put("customerFound", customerData);
+			sessionMap.put("customerId", customerData.getUhId());
+			return "CustomerInfo.jsp?faces-redirect=true";
+		}
+	
+//	public String showAppointmentVisited() {
+//		System.out.println("Inside show appointment");
+//		Map<String, Object> sessionMap =
+//				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+//		sf = SessionHelper.getConnection();
+//		session = sf.openSession();
+//		String uhid = (String) sessionMap.get("uhid");
+//		System.out.println("uhid from show : "+uhid);
+//		Criteria criteria = session.createCriteria(PatientAppointment.class);
+//		criteria.add(Restrictions.eq("uhId", uhid));
+//		criteria.add(Restrictions.eq("status", "VISITED"));		
+//		List<PatientAppointment> patientList = criteria.list();
+//		sessionMap.put("patientList", patientList);
+//		return "ShowPatientList.jsp?faces-redirect=true";
+//		
+//	}
+	@Override
+	public String showAppointmentVisited(String status) {
+		System.out.println("Inside show appointment");
+		Map<String, Object> sessionMap =
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		String uhid = (String) sessionMap.get("uhid");
+		System.out.println("uhid from show : "+uhid);
+		 if (uhid != null && uhid.length() > 0 && "VISITED".equals(status) && currentTimestamp.before(databaseDate)) {
+		Criteria criteria = session.createCriteria(PatientAppointment.class);
+		criteria.add(Restrictions.eq("uhId", uhid));
+		criteria.add(Restrictions.eq("status", "VISITED"));		
+		List<PatientAppointment> patientList = criteria.list();
+		sessionMap.put("patientList", patientList);
+		return "ShowPatientList.jsp?faces-redirect=true";
+		 }
+		 return null;
+	}
+	
+	
+	@Override
+	public String showAppointmentConfirmed(String status) {
+		System.out.println("Inside show appointment");
+		Map<String, Object> sessionMap =
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sf = SessionHelper.getConnection();
+		session = sf.openSession();
+		String uhid = (String) sessionMap.get("uhid");
+		System.out.println("uhid from show : "+uhid);
+		if (uhid != null && uhid.length() > 0 && "CONFIRMED".equals(status) && (currentTimestamp.after(databaseDate)||currentTimestamp.equals(databaseDate))) {
+		Criteria criteria = session.createCriteria(PatientAppointment.class);
+		criteria.add(Restrictions.eq("uhId", uhid));
+		criteria.add(Restrictions.eq("status", "CONFIRMED"));
+		List<PatientAppointment> patientList2 = criteria.list();
+		sessionMap.put("patientList2", patientList2);
+		return "ShowPatientListConfirm.jsp?faces-redirect=true";
+		}
+		return null;
+	}
+
+
+	public List<PatientAppointment> getPatientAppointmentList(int firstRow, int rowsPerPage) {
+		
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		List<PatientAppointment> cdList = null;
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(PatientAppointment.class);
+			criteria.setFirstResult(firstRow);
+			criteria.setMaxResults(rowsPerPage);
+		return criteria.list();
+	}
+
+
+	public int countRows() {
+		SessionFactory sf = SessionHelper.getConnection();
+		Session session = sf.openSession();
+		try {
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(PatientAppointment.class);
+			if (criteria != null) {
+				return criteria.list().size();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	}
+
+

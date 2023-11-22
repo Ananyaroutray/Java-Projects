@@ -1,0 +1,7 @@
+INDEX VERSION 1.134
+D:\Bank-task-servlets\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3276068720.index
+\AgentJSTL\src\main\java
+D:\Bank-task-servlets\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1043964355.index
+\BankServlet\src\main\java
+D:\Bank-task-servlets\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3458693802.index
+\JstlExamples\src\main\java

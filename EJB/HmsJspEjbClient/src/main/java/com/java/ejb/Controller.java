@@ -1,0 +1,39 @@
+package com.java.ejb;
+
+import java.sql.SQLException;
+
+import javax.naming.NamingException;
+
+public class Controller {
+	
+	
+	private EjbImpl dao;
+
+    public EjbImpl getInstance() {
+        if (dao == null) {
+            dao = new EjbImpl();
+        }
+        return dao;
+    }
+
+    public EjbImpl getDao() {
+        return dao;
+    }
+
+    public void setDao(EjbImpl dao) {
+        this.dao = dao;
+    }
+
+    public String addPatient() throws ClassNotFoundException, NamingException, SQLException {
+        getInstance();
+        return dao.addPatient(null);
+    }
+
+    
+}
+
+	
+ 
+
+
+

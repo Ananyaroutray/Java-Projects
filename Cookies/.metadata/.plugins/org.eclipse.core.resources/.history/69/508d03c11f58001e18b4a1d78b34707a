@@ -1,0 +1,87 @@
+package com.java.Ctask;
+
+import java.sql.Time;
+
+public class Custmoer {
+	private String firstName;
+	private String lastName;
+	private String userName;
+	private String passCode;
+	private String email;
+	private String phoneNo;
+	private String satus;
+	private Time ArrivedOn;
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassCode() {
+		return passCode;
+	}
+	public void setPassCode(String passCode) {
+		this.passCode = passCode;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+	public String getSatus() {
+		return satus;
+	}
+	public void setSatus(String satus) {
+		this.satus = satus;
+	}
+	public Time getArrivedOn() {
+		return ArrivedOn;
+	}
+	public void setArrivedOn(Time arrivedOn) {
+		ArrivedOn = arrivedOn;
+	}
+	@Override
+	public String toString() {
+		return "Custmoer [firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", passCode="
+				+ passCode + ", email=" + email + ", phoneNo=" + phoneNo + ", satus=" + satus + ", ArrivedOn="
+				+ ArrivedOn + "]";
+	}
+	public Custmoer(String firstName, String lastName, String userName, String passCode, String email, String phoneNo,
+			String satus, Time arrivedOn) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.passCode = passCode;
+		this.email = email;
+		this.phoneNo = phoneNo;
+		this.satus = satus;
+		ArrivedOn = arrivedOn;
+	}
+	public Custmoer() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+}

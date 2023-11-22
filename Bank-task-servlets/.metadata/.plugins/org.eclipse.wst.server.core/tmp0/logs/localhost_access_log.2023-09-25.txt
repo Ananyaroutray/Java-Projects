@@ -1,0 +1,6 @@
+127.0.0.1 - - [25/Sep/2023:18:26:14 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [25/Sep/2023:18:26:15 +0530] "GET /BankServlet/WEB-INF/classes/com/java/bankservlets/Int1.java HTTP/1.1" 404 1047
+0:0:0:0:0:0:0:1 - - [25/Sep/2023:18:26:15 +0530] "GET /favicon.ico HTTP/1.1" 404 1085
+127.0.0.1 - - [25/Sep/2023:18:29:01 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [25/Sep/2023:18:29:01 +0530] "GET /BankServlet/WEB-INF/classes/com/java/bankservlets/Int1.java HTTP/1.1" 404 1047
+0:0:0:0:0:0:0:1 - - [25/Sep/2023:18:29:01 +0530] "GET /favicon.ico HTTP/1.1" 404 1085

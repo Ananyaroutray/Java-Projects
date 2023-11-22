@@ -1,0 +1,18 @@
+package com.java.ejb;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+public class CustomerDAOImpl implements CustomerDAO {
+
+	
+	SessionFactory sf;
+	Session session;
+	
+	@Override
+	public String addCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

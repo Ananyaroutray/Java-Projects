@@ -1,0 +1,31 @@
+package com.java.ejb;
+
+import java.util.List;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+/**
+ * Session Bean implementation class HmsBean
+ */
+@Stateless
+@Remote(HmsBeanRemote.class)
+public class HmsBean implements HmsBeanRemote {
+
+  @PersistenceContext(unitName="HmsMgmtPU")
+  private EntityManager entityManager;
+	
+    public HmsBean() {
+        // TODO Auto-generated constructor stub
+    }
+
+	@Override
+	public List<Doctor> showDoctor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

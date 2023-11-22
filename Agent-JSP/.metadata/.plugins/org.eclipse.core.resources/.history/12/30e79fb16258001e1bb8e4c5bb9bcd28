@@ -1,0 +1,45 @@
+<%@page import="com.java.agent.Agent"%>
+<%@page import="java.util.List"%>
+<%@page import="com.java.agent.AgentDAOImpl"%>
+<%@page import="com.java.agent.AgentDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+		AgentDAO dao = new AgentDAOImpl();
+		List<Agent> agentList = dao.showAgentDao();
+	%>
+	<table border="3" align="center">
+		<tr>
+			<th>AgentId</th>
+			<th>FirstName</th>
+			<th>LastName</th>
+			<th>City</th>
+			<th>PayMode</th>
+			<th>Premium</th>
+		</tr>
+		<%
+			for(Agent agent : agentList) {
+		%>
+			<tr>
+				<td><%=agent.getAgentId() %> </td>
+				<td><%=agent.getFirstName() %> </td>
+				<td><%=agent.getLastName() %> </td>
+				<td><%=agent.getCity() %> </td>
+				<td><%=agent.getPayMode() %> </td>
+				<td><%=agent.getPremium() %> </td>
+			</tr>
+		<%
+			}
+		%>
+	</table>
+	<hr/>
+	<a href="AddAgent.jsp">Add Agent</a>
+</body>
+</html>

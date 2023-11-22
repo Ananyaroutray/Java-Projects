@@ -1,0 +1,13 @@
+package com.java.agent;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public interface AgentDAO {
+	List<Agent> showAgentDao() throws ClassNotFoundException, SQLException;
+	Agent searchAgentDao(int agentid);
+	String addAgentDao(Agent agent);
+	String deleteAgentDao(int agentid);
+	String updateAgent(Agent agentNew);
+
+}

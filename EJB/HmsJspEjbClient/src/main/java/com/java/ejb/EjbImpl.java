@@ -1,0 +1,14 @@
+package com.java.ejb;
+
+import javax.naming.NamingException;
+ 
+public class EjbImpl {
+ 
+
+	public String addPatient(PatientReport patientreport) throws NamingException {
+		PatientReportRemote remote=RemoteHelper.lookupRemoteStatelessPatient();
+		remote.addReport(patientreport);
+		return "ShowPatientReports.jsp?faces-redirect=true";
+	}
+
+}

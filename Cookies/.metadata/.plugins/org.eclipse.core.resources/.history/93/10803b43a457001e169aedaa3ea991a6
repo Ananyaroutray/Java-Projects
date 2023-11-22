@@ -1,0 +1,16 @@
+package com.java.Ctask;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class CustmoerDAOImpl implements CustmoerDAO{
+	PreparedStatement pst;
+	Connection connection;
+
+	@Override
+	public String createUser(Custmoer custmoer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

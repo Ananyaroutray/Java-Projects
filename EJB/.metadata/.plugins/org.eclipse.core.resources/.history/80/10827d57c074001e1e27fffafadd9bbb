@@ -1,0 +1,21 @@
+package com.java.ejb;
+
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@Stateless
+@Remote(PatientReportRemote.class)
+public class PatientReportBean implements PatientReportRemote {
+	
+	@PersistenceContext(unitName = "EmpMgmtPU")
+	 private EntityManager entityManager;
+
+	@Override
+	public String addEmployee(PatientReport patientreport) {
+		EntityManager.persist(patientreport);
+		return "Employ Record Inserted...";
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.java.agent;
+
+import java.sql.SQLException;
+import java.util.List;
+
+public interface AgentDAO {
+	List<Agent> showAgentDao() throws SQLException;
+	Agent searchAgentDao(int agentId);
+	String addAgentDao(Agent agent);
+
+}

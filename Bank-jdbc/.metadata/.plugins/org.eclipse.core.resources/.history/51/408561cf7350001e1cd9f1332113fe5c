@@ -1,0 +1,13 @@
+package com.java.lms;
+
+public class LeaveDAOImpl implements LeaveDetailsDAO{
+
+	@Override
+	public String applyLeave(LeaveDetails leavedetails) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
+}

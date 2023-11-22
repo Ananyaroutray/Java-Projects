@@ -1,0 +1,6 @@
+127.0.0.1 - - [16/Sep/2023:11:50:34 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [16/Sep/2023:11:50:35 +0530] "GET /BankServlet/SearchAccount.html HTTP/1.1" 200 338
+127.0.0.1 - - [16/Sep/2023:12:15:19 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [16/Sep/2023:12:15:26 +0530] "GET /BankServlet/BankSearchServlet?accountno=10001 HTTP/1.1" 500 2182
+127.0.0.1 - - [16/Sep/2023:12:20:01 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [16/Sep/2023:12:20:09 +0530] "GET /BankServlet/BankSearchServlet?accountno=1001 HTTP/1.1" 500 2182

@@ -1,0 +1,9 @@
+package com.java.ejb;
+
+public class CustomerAuthorization {
+
+	private int authId;
+	private int custId;
+	private String otp;
+	private String status;	
+}

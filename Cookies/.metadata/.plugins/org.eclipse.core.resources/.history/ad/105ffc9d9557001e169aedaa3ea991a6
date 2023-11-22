@@ -1,0 +1,6 @@
+package com.java.infinite;
+
+public interface LoginDAO {
+	String createUser(Login login);
+
+}

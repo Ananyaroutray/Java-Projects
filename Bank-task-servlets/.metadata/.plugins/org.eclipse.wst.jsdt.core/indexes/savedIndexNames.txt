@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+D:\Bank-task-servlets\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2271952313.index
+1616891435.index
+1346295242.index
+2410235498.index
+1337574035.index
+445493580.index
+1659421174.index
+2208425027.index

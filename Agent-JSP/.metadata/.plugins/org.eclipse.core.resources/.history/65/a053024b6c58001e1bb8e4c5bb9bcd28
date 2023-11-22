@@ -1,0 +1,59 @@
+<%@page import="com.java.agent.Gender"%>
+<%@page import="com.java.agent.Agent"%>
+<%@page import="com.java.agent.AgentDAOImpl"%>
+<%@page import="com.java.agent.AgentDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%
+	int agentId = Integer.parseInt(request.getParameter("agentid"));
+	AgentDAO dao = new AgentDAOImpl();
+	Agent agent = dao.searchAgentDao(agentId);
+%>
+<form method="get" action="UpdateAgent.jsp">
+	<center>
+	Agent Id : 
+		<input type="number" name="agentId" /> <br/><br/>
+		Agent Name : 
+		<input type="text" name="name" /> <br/><br/>
+		City : 
+		<input type="text" name="city" /> <br/><br/>
+		Gender : 
+		<select name="gender">
+			<option value="MALE">Male</option>
+			<option value="FEMALE">Female</option>
+		</select> <br/><br/>
+		Marital Status : 
+		<input type="text" name="maritalstatus" /> <br/><br/>
+		Premium : 
+		<input type="number" name="premium" />
+		<br/><br/>
+		<input type="submit" value="Update Agent" />
+	</center>
+</form>
+<%
+if(request.getParameter("agentId")!=null &&
+request.getParameter("premium")!=null
+){
+		Agent agentUpdated = new Agent();
+		agentUpdated.setAgentId(Integer.parseInt(request.getParameter("agentId")));
+		agentUpdated.setName(request.getParameter("name"));
+		agentUpdated.setCity(request.getParameter("city"));
+		agentUpdated.setGender(Gender.valueOf(request.getParameter("gender")));
+		agentUpdated.setMaritalStatus(request.getParameter("maritalstatus"));
+		agentUpdated.setPremium(Double.parseDouble(request.getParameter("premium")));
+		dao.updateAgentDao(agentUpdated);	
+%>
+<jsp:forward page="AgentShow.jsp"/>
+<%
+}
+%>
+	
+</body>
+</html>

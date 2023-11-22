@@ -1,0 +1,10 @@
+package com.java.ejb;
+
+public class DoctorImpl {
+	
+	public List<Doctor> showEmployEjb() throws NamingException{
+		EmployBeanRemote remote = RemoteHelper.lookupRemoteStatelessEmploy();
+		return remote.showEmploy();
+	}
+
+}

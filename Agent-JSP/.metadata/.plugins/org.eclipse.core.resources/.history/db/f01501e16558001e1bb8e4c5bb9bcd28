@@ -1,0 +1,60 @@
+package com.java.agent;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+	
+	public class AgentDAOImpl implements AgentDAO {
+		Connection connection;
+		PreparedStatement pst;
+
+		@Override
+		public List<Agent> showAgentDao() throws SQLException, ClassNotFoundException {
+			connection = ConnectionHelper.getConnection();
+			String cmd = "select * from Agent";
+			pst = connection.prepareStatement(cmd);
+			ResultSet rs = pst.executeQuery();
+			List<Agent> agentList = new ArrayList<Agent>();
+			Agent agent = null;
+			while(rs.next()) {
+				agent = new Agent();
+				agent.setAgentId(rs.getInt("agentId"));
+				agent.setName(rs.getString("Name"));
+				agent.setCity(rs.getString("city"));
+				agent.setGender(Gender.valueOf(rs.getString("gender")));
+				agent.setMaritalStatus(rs.getString("maritalStatus"));
+				agent.setPremium(rs.getDouble("premium"));
+				agentList.add(agent);
+			}
+			
+			return agentList;
+		}
+
+		@Override
+		public Agent searchAgentDao(int agentId) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public String addAgentDao(Agent agent) {
+			connection = ConnectionHelper.getConnection();
+	        String cmd = "Insert into Agent(agentId,name,city,gender,maritalStatus,premium) "
+	         		+ " values(?,?,?,?,?,?)";
+	         PreparedStatement pst = connection.prepareStatement(cmd);
+	         pst.setInt(1, agent.getAgentId());
+	         pst.setString(2, agent.getName());
+	         pst.setString(3, agent.getCity());
+	         pst.setString(4, agent.getGender().toString());   
+	         pst.setString(5, agent.getMaritalStatus());
+	         pst.setDouble(6, agent.getPremium());
+	         pst.executeUpdate();
+	         return "Employ Record Inserted...";
+
+		
+	}
